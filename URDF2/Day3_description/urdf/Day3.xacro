@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<robot name="Day3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find Day3_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find Day3_description)/urdf/Day3.trans" />
+<xacro:include filename="$(find Day3_description)/urdf/Day3.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0007135159114692553 6.252184428201031e-17 1.4823876407274034e-05" rpy="0 0 0"/>
+    <mass value="1.9983709068544875"/>
+    <inertia ixx="0.002356" iyy="0.007892" izz="0.009479" ixy="0.0" iyz="0.0" ixz="-0.000654"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="7.632783294297951e-17 0.0025000000000000022 1.0755285551056204e-16" rpy="0 0 0"/>
+    <mass value="0.30826877913349837"/>
+    <inertia ixx="0.000193" iyy="0.000385" izz="0.000193" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.06 -0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.06 -0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-3.469446951953614e-17 -0.0025000000000000022 6.938893903907228e-18" rpy="0 0 0"/>
+    <mass value="0.3082687791334984"/>
+    <inertia ixx="0.000193" iyy="0.000385" izz="0.000193" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.06 0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.06 0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="1.3877787807814457e-17 -2.220446049250313e-18 0.007500000000000003" rpy="0 0 0"/>
+    <mass value="0.08323257036604459"/>
+    <inertia ixx="6e-06" iyy="6e-06" izz="9e-06" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.065 -0.0 -0.023" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.065 -0.0 -0.023" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Day3_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev10" type="continuous">
+  <origin xyz="-0.06 0.055 -0.02" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Rev11" type="continuous">
+  <origin xyz="-0.06 -0.055 -0.02" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Rev12" type="continuous">
+  <origin xyz="0.065 0.0 0.023" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+</robot>
